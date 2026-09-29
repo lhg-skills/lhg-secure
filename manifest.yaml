@@ -1,0 +1,8 @@
+---
+slug: lhg-secure
+display_name: 代码安全审计
+description: 代码安全审计：建上下文→九维度并行扫描→对抗验证→分级报告四步流程，默认证伪立场逐条推翻候选，输出带证据链的分级风险清单、误报说明与覆盖率声明。
+version: 1.0.0
+author: 刘洪光
+license: MIT
+---
