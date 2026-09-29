@@ -1,5 +1,10 @@
 # lhg-secure · 代码安全审计
 
+> **一句话**：九维度代码安全扫描 + 对抗验证，输出分级风险清单。
+>
+> **一键安装**：`npx skills add lhg-skills/lhg-secure`
+
+
 **Code Security Audit** — 四步流程给代码做安全审计：先建业务与信任边界上下文，再按 9 个维度并行收集候选，然后以"证伪"立场逐条对抗验证，最后输出带证据链的分级风险清单。默认不信任第一印象：看到 `eval`、`shell=True` 先记候选不判罪，证据链写不完整一律不判高危。
 
 ## 一句话安装
@@ -33,6 +38,38 @@ npx skills add lhg-skills/lhg-secure
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## 什么时候用 / 什么时候不用
+
+**用它，当你**：
+- 代码上线前的安全审计
+- 接手祖传代码/第三方代码，先扫一遍风险
+
+**别用它，当你**：
+- 替代专业渗透测试与合规审计
+
+---
+
+## lhg-skills 矩阵
+
+刘洪光出品的中文 Agent Skills，全开源：
+
+| Skill | 名称 | 一句话 |
+|---|---|---|
+| `lhg-writing` | 中文写作 | 风格指纹 → Orwell 六规则 → AI 味诊断，写出有人味的中文 |
+| `lhg-slides` | HTML 演示文稿 | 大纲/文档一键生成可编辑的单文件 HTML slides |
+| `lhg-trend` | 近30天热点扫描 | 话题火不火、为什么火、还能不能追 |
+| `lhg-deep-research` | 深度调研 | 多源检索 → 结构化中文调研报告 |
+| `lhg-benchmark-topic-factory` | 对标拆解选题工厂 | 找对标 → 逆向 100 条选题库 → 口播文案 |
+| `lhg-net` | 互联网能力层 | 中文优先多平台取数，取不到诚实说 |
+| `lhg-craft` | AI 编程工程规范 | 分级澄清 → TDD → 独立评审 → 证据门禁 |
+| `lhg-debug` | 系统化调试 | 复现 → 定位 → 修复 → 验证 |
+| `lhg-secure` | 代码安全审计 | 九维度扫描 + 对抗验证，分级风险清单 |
+| `lhg-finder` | 找 skill 质检门 | 装第三方 skill 前的 blocker 检查 + 六维评分 |
+
+安装任意一个：`npx skills add lhg-skills/<上表 slug>`
+
+---
 
 ## 出品：刘洪光
 
