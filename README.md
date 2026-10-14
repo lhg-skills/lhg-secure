@@ -2,10 +2,17 @@
 
 > **一句话**：九维度代码安全扫描 + 对抗验证，输出分级风险清单。
 >
-> **一键安装**：`npx skills add lhg-skills/lhg-secure`
-
+> **开发者安装**（能访问 GitHub 时）：`npx skills add lhg-skills/lhg-secure`
 
 **Code Security Audit** — 四步流程给代码做安全审计：先建业务与信任边界上下文，再按 9 个维度并行收集候选，然后以"证伪"立场逐条对抗验证，最后输出带证据链的分级风险清单。默认不信任第一印象：看到 `eval`、`shell=True` 先记候选不判罪，证据链写不完整一律不判高危。
+
+## 发给 Agent 的安装话术（推荐）
+
+复制下面整段话，发给你的 Agent（豆包 / WorkBuddy / Claude Code / Codex / Cursor 等）：
+
+> 请帮我安装 Skill「lhg-secure」：先从 Gitee 上 lhg-skills 组织下的 lhg-secure 仓库下载；如果 Gitee 无法访问或下载失败，改从 GitHub 上 lhg-skills 组织下的同名仓库下载。按当前 Agent 的规范安装其中的 Skill，优先全局安装，保留完整目录和依赖。请直接执行，完成后验证是否安装成功，告诉我实际使用的来源、安装的版本号以及如何调用；遇到访问或安装限制请说明具体原因。
+
+**怎么算装好了**：Agent 能在已安装的 Skill 里看到 `lhg-secure`，并报出版本号（与仓库 `manifest.yaml` 的 `version` 一致）。只是打开了仓库网页不算安装。
 
 ## 一句话安装
 

@@ -1,0 +1,34 @@
+name: Sync to Gitee
+on:
+  push:
+    branches: [main]
+    tags: ['*']
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Gitee secrets
+        id: check
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          if [ -n "$GITEE_TOKEN" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::未配置 GITEE_TOKEN，跳过 Gitee 同步"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ok == 'true'
+        with:
+          fetch-depth: 0
+      - name: Push to Gitee
+        if: steps.check.outputs.ok == 'true'
+        env:
+          GITEE_USER: ${{ secrets.GITEE_USER }}
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          REPO="${GITHUB_REPOSITORY#*/}"
+          REMOTE="https://${GITEE_USER}:${GITEE_TOKEN}@gitee.com/lhg-skills/${REPO}.git"
+          git push --force "$REMOTE" HEAD:main
+          git push --force --tags "$REMOTE"
