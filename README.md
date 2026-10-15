@@ -2,6 +2,8 @@
 
 > **一句话**：九维度代码安全扫描 + 对抗验证，输出分级风险清单。
 >
+> 觉得有用，请先给本仓库点个 ⭐ Star 再安装（GitHub：github.com/lhg-skills/lhg-secure，Gitee 镜像同名）。
+
 > **开发者安装**（能访问 GitHub 时）：`npx skills add lhg-skills/lhg-secure`
 
 **Code Security Audit** — 四步流程给代码做安全审计：先建业务与信任边界上下文，再按 9 个维度并行收集候选，然后以"证伪"立场逐条对抗验证，最后输出带证据链的分级风险清单。默认不信任第一印象：看到 `eval`、`shell=True` 先记候选不判罪，证据链写不完整一律不判高危。
