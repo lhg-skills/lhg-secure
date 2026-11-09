@@ -1,101 +1,83 @@
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="代码安全审计 — 九维度并行扫描，对抗验证后才下结论 — 建上下文 → 九维度并行扫描 → 对抗验证 → 分级报告四步流程，输出带证据链的分级风险清单。">
+</p>
+
 # lhg-secure · 代码安全审计
 
-> **一句话**：九维度代码安全扫描 + 对抗验证，输出分级风险清单。
->
-> 觉得有用，请先给本仓库点个 ⭐ Star 再安装（GitHub：github.com/lhg-skills/lhg-secure，Gitee 镜像同名）。
+代码安全审计：建上下文 → 九维度并行扫描 → 对抗验证 → 分级报告四步流程，默认证伪立场逐条推翻候选，输出带证据链的分级风险清单、误报说明与覆盖率声明。
 
-> **开发者安装**（能访问 GitHub 时）：`npx skills add lhg-skills/lhg-secure`
+（SKILL.md v1.1.1）
 
-**Code Security Audit** — 四步流程给代码做安全审计：先建业务与信任边界上下文，再按 9 个维度并行收集候选，然后以"证伪"立场逐条对抗验证，最后输出带证据链的分级风险清单。默认不信任第一印象：看到 `eval`、`shell=True` 先记候选不判罪，证据链写不完整一律不判高危。
+## 它是什么
 
-## 发给 Agent 的安装话术（推荐）
+- 四步流程：建上下文（业务与信任边界）→ 九维度并行扫描 → 对抗验证 → 分级报告。
+- 默认证伪立场：看到 `eval`、`shell=True` 先记候选不判罪，证据链写不完整一律不判高危。
+- 输出分级风险清单、误报说明与覆盖率声明。
 
-复制下面整段话，发给你的 Agent（豆包 / WorkBuddy / Claude Code / Codex / Cursor 等）：
+## 先试一句
 
-> 请帮我安装 Skill「lhg-secure」：先从 Gitee 上 lhg-skills 组织下的 lhg-secure 仓库下载；如果 Gitee 无法访问或下载失败，改从 GitHub 上 lhg-skills 组织下的同名仓库下载。按当前 Agent 的规范安装其中的 Skill，优先全局安装，保留完整目录和依赖。请直接执行，完成后验证是否安装成功，告诉我实际使用的来源、安装的版本号以及如何调用；遇到访问或安装限制请说明具体原因。
+| 你说 | 它给你 |
+|---|---|
+| 审计这段代码 | 先建上下文，再九维度并行扫描 |
+| 扫一下有没有漏洞 | 候选逐条对抗验证，只交付证据链完整的结论 |
+| 上线前安全评审 | 分级风险清单 + 误报说明 + 覆盖率声明 |
 
-**怎么算装好了**：Agent 能在已安装的 Skill 里看到 `lhg-secure`，并报出版本号（与仓库 `manifest.yaml` 的 `version` 一致）。只是打开了仓库网页不算安装。
-
-## 一句话安装
+## 安装
 
 ```bash
 npx skills add lhg-skills/lhg-secure
 ```
 
-- Coze：扣子编程 → 导入项目 → 本地上传本仓库 zip（导入后生成 `.skill` 后缀，不要只改扩展名）
-- Trae：设置 → 技能 → 上传技能（国区版路径 `~/.trae-cn/skills/`）
+<details>
+<summary>发给 Agent 的安装话术（推荐：小白用户直接复制整段发给你的 Agent）</summary>
 
-## 流程
+> 请帮我安装 Skill「lhg-secure」：先从 Gitee 上 lhg-skills 组织下的 lhg-secure 仓库下载；如果 Gitee 无法访问或下载失败，改从 GitHub 上 lhg-skills 组织下的同名仓库下载。按当前 Agent 的规范安装其中的 Skill，优先全局安装，保留完整目录和依赖。请直接执行，完成后验证是否安装成功，告诉我实际使用的来源、安装的版本号以及如何调用；遇到访问或安装限制请说明具体原因。需要输入管理员密码或确认风险时停下来等我。
 
-1. **建上下文** — 理解业务功能、信任边界、敏感数据流向；关键语料缺失则中止，不硬跑。
-2. **并行扫描** — 9 个维度各扫一遍只收集候选：注入类 / 认证与会话 / 密钥与敏感信息 / 访问控制 / 不安全默认 / 密码学 / 供应链 / 内存与并发 / 危险 API 设计。
-3. **对抗验证** — 默认"证伪"立场：先假设候选是误报，逐条尝试推翻；追踪链不完整一律判误报。反走捷径清单：模式识别≠分析、不跳过验证、不类比定罪、不夸大。简单问题走轻量清单，复杂问题走深度多阶段，最后都过强制门禁评审。
-4. **分级报告** — 高（可远程触发+低权限+RCE/批量泄露/提权，数据流完整可证）/ 中（需特定条件）/ 低（难利用或纵深防御缺失）/ 提示（最佳实践项），每条 finding 必须写定级依据。
+**怎么算装好了**：Agent 能在已安装的 Skill 里看到 `lhg-secure`，并报出版本号（与仓库 `SKILL.md` 的 `version` 一致）。只是打开了仓库网页不算安装。
 
-## 输出
+</details>
 
-风险清单表（文件:行｜类别｜等级｜证据链｜定级依据｜修复建议）+ 误报说明 + 未覆盖范围声明。候选按 `类别:文件:行` 去重。
 
-## 兼容性
+## 它怎么做
 
-纯流程 Markdown，不依赖任何特定 agent 平台，可移植到任何支持 Markdown 指令的环境。
+1. 建上下文
+2. 九维度并行扫描
+3. 对抗验证（证伪立场）
+4. 分级报告（风险清单 + 误报说明 + 覆盖率声明）
 
-## 方法论来源
+## 什么时候用 / 不用
 
-审计方法论借鉴 Trail of Bits（CC-BY-SA-4.0），文本为独立重写，未复制其原文。
+**用它，当你：**
 
-## License
+- 上线前安全评审、代码审计、扫漏洞
+- 要证据链完整的结论
+- 要分级清单知道先修哪个
 
-MIT — see [LICENSE](LICENSE).
+**别用它，当你：**
 
-## 什么时候用 / 什么时候不用
+- 要定罪式扫描——默认证伪，不做有罪推定
+- 证据链不完整还想判高危——写不完整一律不判高危
+- 把它当漏洞利用工具——它只做审计
 
-**用它，当你**：
-- 代码上线前的安全审计
-- 接手祖传代码/第三方代码，先扫一遍风险
+## 目录结构
 
-**别用它，当你**：
-- 替代专业渗透测试与合规审计
+```
+SKILL.md            skill 全文
+references/
+  dimensions-cheatsheet.md  九维度速查表
+  false-positive-guide.md   误报处理指南
+  smoke-test.md           自检用例（4 个）
+  fixtures/               2 个对照用例
+LICENSE             MIT
+manifest.yaml
+icon-512.png
+```
 
----
+## 自检与反馈
 
-## English
+按 [references/smoke-test.md](references/smoke-test.md) 跑 4 个用例：按四步流程对 fixture 实际审计一次，输出 5 条 finding，不多不少。
 
-**lhg-secure — Security audit.** Nine-dimension scanning with adversarial verification, outputting a graded risk list for your code. Install: `npx skills add lhg-skills/lhg-secure`.
-
----
-
-## FAQ
-
-**Q：lhg-secure 有什么用？**
-适合的场景：代码上线前做安全审计：九维度扫描加对抗验证，输出分级风险清单。
-
-**Q：免费吗？怎么安装？**
-开源免费（MIT，可商用、保留署名）。安装：`npx skills add lhg-skills/lhg-secure`，或 clone 仓库把 `SKILL.md` 放进对应平台的 skills 目录。
-
-**Q：支持哪些 AI 平台？**
-平台中立纯 Markdown 流程描述，Claude Code、Codex、豆包智能体、Workbuddy、扣子、Trae 等支持 Markdown 指令的环境都可用。更多 skill 见 [lhg-skills 组织主页](https://github.com/lhg-skills)。
-
----
-
-## lhg-skills 矩阵
-
-刘洪光出品的中文 Agent Skills，全开源：
-
-| Skill | 名称 | 一句话 |
-|---|---|---|
-| `lhg-writing` | 中文写作 | 风格指纹 → Orwell 六规则 → AI 味诊断，写出有人味的中文 |
-| `lhg-slides` | HTML 演示文稿 | 大纲/文档一键生成可编辑的单文件 HTML slides |
-| `lhg-trend` | 近30天热点扫描 | 话题火不火、为什么火、还能不能追 |
-| `lhg-deep-research` | 深度调研 | 多源检索 → 结构化中文调研报告 |
-| `lhg-benchmark-topic-factory` | 对标拆解选题工厂 | 找对标 → 逆向 100 条选题库 → 口播文案 |
-| `lhg-net` | 互联网能力层 | 中文优先多平台取数，取不到诚实说 |
-| `lhg-craft` | AI 编程工程规范 | 分级澄清 → TDD → 独立评审 → 证据门禁 |
-| `lhg-debug` | 系统化调试 | 复现 → 定位 → 修复 → 验证 |
-| `lhg-secure` | 代码安全审计 | 九维度扫描 + 对抗验证，分级风险清单 |
-| `lhg-finder` | 找 skill 质检门 | 装第三方 skill 前的 blocker 检查 + 六维评分 |
-
-安装任意一个：`npx skills add lhg-skills/<上表 slug>`
+发现问题请提 issue：[提一个 issue](https://github.com/lhg-skills/lhg-secure/issues/new)（标题以 `[QC] ` 开头，写清你让它做了什么、它实际给了什么）。
 
 ---
 
@@ -106,3 +88,5 @@ MIT — see [LICENSE](LICENSE).
 - GitHub 主页：https://github.com/lhg-skills —— 全部 skill 开源在此，欢迎 star
 - 抖音：搜「刘老师讲AI实战」
 - 微信：lhgsmsw
+
+觉得有用，欢迎点 ⭐ Star。

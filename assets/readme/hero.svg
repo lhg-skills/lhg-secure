@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">代码安全审计 — 九维度并行扫描，对抗验证后才下结论</title>
+  <desc id="desc">建上下文 → 九维度并行扫描 → 对抗验证 → 分级报告四步流程，输出带证据链的分级风险清单。</desc>
+
+  <defs>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="360" rx="14" fill="#111827"/>
+  <rect x="1" y="1" width="1198" height="358" rx="14" fill="none" stroke="#374151" stroke-width="1.5"/>
+
+  <g id="title-block">
+    <rect x="64" y="62" width="12" height="12" fill="#FBBF24"/>
+    <text class="mono" x="86" y="74" font-size="17" letter-spacing="2" fill="#9CA3AF">代码安全审计 · SKILL</text>
+    <text class="sans" x="64" y="152" font-size="72" font-weight="700" fill="#F3F4F6">安全审计</text>
+    <text class="sans" x="64" y="196" font-size="26" font-weight="700" fill="#F87171">九维度扫描 + 对抗验证</text>
+    <text class="sans" x="64" y="238" font-size="21" fill="#F3F4F6">默认证伪立场：证据链不完整，一律不判高危。</text>
+  </g>
+
+  <line x1="700" y1="56" x2="700" y2="256" stroke="#374151" stroke-width="1.5"/>
+
+  <g id="proof">
+    <text class="sans" x="740" y="74" font-size="17" fill="#9CA3AF">审计的三个硬点</text>
+    <text class="mono" x="740" y="118" font-size="20" font-weight="700" fill="#FBBF24">九维度</text>
+    <text class="sans" x="814" y="118" font-size="22" font-weight="700" fill="#F3F4F6">并行扫描</text>
+    <text class="mono" x="740" y="164" font-size="20" font-weight="700" fill="#FBBF24">证伪立场</text>
+    <text class="sans" x="834" y="164" font-size="22" font-weight="700" fill="#F3F4F6">逐条对抗验证</text>
+    <text class="mono" x="740" y="210" font-size="20" font-weight="700" fill="#FBBF24">证据链</text>
+    <text class="sans" x="814" y="210" font-size="22" font-weight="700" fill="#F3F4F6">分级风险清单</text>
+  </g>
+
+  <line x1="64" y1="288" x2="1136" y2="288" stroke="#374151" stroke-width="1.5"/>
+  <g id="install">
+    <text class="mono" x="64" y="327" font-size="16" fill="#9CA3AF">安装</text>
+    <text class="mono" x="140" y="327" font-size="20" font-weight="700" fill="#F87171">npx skills add lhg-skills/lhg-secure</text>
+  </g>
+</svg>
